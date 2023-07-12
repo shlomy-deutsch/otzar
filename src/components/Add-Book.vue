@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 v-onlinedirective>You are not online</h1>
     <form @submit.prevent="send">
       <input type="text" placeholder="שם ספר" v-model="FormValues.Name" />
       <input type="text" placeholder="שם מחבר" v-model="FormValues.Author" />
@@ -19,11 +20,14 @@
 <script>
 import axios from "axios";
 import AppSnackbar from "./Snackbar.vue";
+import onlinedirective from "../direcives/onlinedirective";
 
 export default {
   name: "Add-Book",
   components: { AppSnackbar },
-
+  directives: {
+    onlinedirective,
+  },
   data() {
     return {
       FormValues: {

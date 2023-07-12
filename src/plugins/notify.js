@@ -1,5 +1,3 @@
-// notificationPlugin.js
-
 const NotificationPlugin = {
   install(Vue) {
     Vue.prototype.$sendNotification = function (message, duration) {
