@@ -12,7 +12,6 @@ export default new Vuex.Store({
   mutations: {
     pushProducts(state, data) {
       (state.products = [...data]),
-        //show user msg
         Vue.prototype.$sendNotification("Products updated!", 2000);
     },
   },

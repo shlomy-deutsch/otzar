@@ -8,11 +8,4 @@ export default {
       el.style.display = "none";
     }
   },
-  // update(el, binding) {
-  //   if (navigator.onLine) {
-  //     el.style.display = '';
-  //   } else {
-  //     el.style.display = 'none';
-  //   }
-  // },
 };
