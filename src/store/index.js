@@ -4,9 +4,17 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
+  state: {
+    products: [],
+  },
   getters: {},
-  mutations: {},
+  mutations: {
+    pushProducts(state, data) {
+      (state.products = [...data]),
+        //show user msg
+        Vue.prototype.$sendNotification("Products updated!", 2000);
+    },
+  },
   actions: {},
   modules: {},
 });
