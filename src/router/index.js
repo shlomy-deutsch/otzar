@@ -16,6 +16,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/Add-Book.vue"),
   },
+  {
+    path: "/edit",
+    name: "AppDelete",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/Edit-Book.vue"),
+  },
 ];
 
 const router = new VueRouter({

@@ -36,7 +36,7 @@ export default {
     };
   },
   mounted() {
-    this.$sendNotification("cbcbcbcbcbc", 2000);
+    // this.$sendNotification("cbcbcbcbcbc", 2000);
 
     axios.get("http://localhost:3000/api/products").then((response) => {
       const seenIds = {};

@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     online: false,
+    item: {},
   },
   getters: {},
   mutations: {

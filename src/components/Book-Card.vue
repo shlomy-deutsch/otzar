@@ -9,11 +9,16 @@
         :key="product.Book_ID"
       >
         <h3>{{ product.Book_Name }}</h3>
+        <App-delete :id="product.Book_ID"></App-delete>
+        <router-link to="/edit">
+          <md-button class="md-fab md-mini md-plain" @click="pushItem(product)">
+            <md-icon>edit</md-icon>
+          </md-button></router-link
+        >
         <h4>{{ product.Author_Name }}</h4>
       </div>
     </div>
     <div class="imgs">
-      <!-- <img :src="`http://localhost:3000/api/products/images/2/1`" /> -->
       <AppBookContent
         class="y"
         v-if="clicked == true"
@@ -24,11 +29,14 @@
 </template>
 
 <script>
+import AppDelete from "@/components/Delete-Book.vue";
 import AppBookContent from "./Book-Content.vue";
+// import AppEdit from "@/components/Delete-Book.vue";
 import { mapState } from "vuex";
+import store from "../store";
 export default {
   name: "App-Book-Card",
-  components: { AppBookContent },
+  components: { AppBookContent, AppDelete },
   data() {
     return {
       clicked: false,
@@ -40,7 +48,11 @@ export default {
       this.clicked = true;
       this.id = id;
     },
+    pushItem(item) {
+      store.state.item = item;
+    },
   },
+
   computed: {
     ...mapState(["products"]),
   },
@@ -50,16 +62,18 @@ export default {
 <style scoped>
 .card {
   display: flex;
-  /* display: inline-block; */
   text-align: left;
-  /* border: 1px solid black; */
   padding: 1px 10px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 5px 5px 10px;
-  align-items: flex-end;
-  flex-direction: column;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
+
 .container {
   justify-items: end;
   display: flex;

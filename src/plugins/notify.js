@@ -7,6 +7,8 @@ const NotificationPlugin = {
       notificationElement.style.backgroundColor = "red";
       notificationElement.style.color = "#333";
       notificationElement.style.padding = "10px";
+      notificationElement.style.position = "fixed";
+
       document.getElementById("app").appendChild(notificationElement);
 
       setTimeout(() => {
