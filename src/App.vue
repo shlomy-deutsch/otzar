@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/add">הוסף ספר</router-link>
+      <router-link to="/">דף הבית</router-link> |
+      <router-link to="/add">הוסף ספר</router-link> |
+      <router-link to="/collections">מאגרים</router-link>
     </nav>
     <router-view />
   </div>

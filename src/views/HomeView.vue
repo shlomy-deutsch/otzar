@@ -32,11 +32,11 @@ export default {
       txt: "",
       items: [],
       snackbarmsg: "כל המוצרים הגיעו",
-      snackbar: true,
+      snackbar: false,
     };
   },
   mounted() {
-    // this.$sendNotification("cbcbcbcbcbc", 2000);
+    this.$sendNotification("cbcbcbcbcbc", 2000);
 
     axios.get("http://localhost:3000/api/products").then((response) => {
       const seenIds = {};
@@ -53,7 +53,6 @@ export default {
         }
       });
       store.state.products = filteredArray;
-      console.log(store.state.products);
       this.items = [...store.state.products];
 
       // this.items = store.state.products;

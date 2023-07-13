@@ -9,13 +9,14 @@
         :key="product.Book_ID"
       >
         <h3>{{ product.Book_Name }}</h3>
+        <br />
+        <h4>{{ product.Author_Name }}</h4>
         <App-delete :id="product.Book_ID"></App-delete>
         <router-link to="/edit">
           <md-button class="md-fab md-mini md-plain" @click="pushItem(product)">
             <md-icon>edit</md-icon>
           </md-button></router-link
         >
-        <h4>{{ product.Author_Name }}</h4>
       </div>
     </div>
     <div class="imgs">

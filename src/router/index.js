@@ -22,6 +22,12 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/Edit-Book.vue"),
   },
+  {
+    path: "/collections",
+    name: "AppCollections",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/Collections.vue"),
+  },
 ];
 
 const router = new VueRouter({
