@@ -1,8 +1,9 @@
 <template>
   <div>
     <md-menu md-direction="bottom-start">
-      <md-button md-menu-trigger>פרשיות התורה</md-button>
-
+      <md-button md-menu-trigger style="color: greenyellow"
+        >פרשיות התורה</md-button
+      >
       <md-menu-content>
         <md-menu
           v-for="(parsha, index) in Object.values(parshiot)"
@@ -10,12 +11,12 @@
           md-direction="bottom-end"
           :md-close-on-select="true"
         >
-          <md-button md-menu-trigger>{{ parsha[0] }}</md-button>
+          <md-button md-menu-trigger>{{ parsha[0].Name }}</md-button>
           <md-menu-content>
             <md-menu-item
               v-for="(subParsha, subIndex) in parsha"
               :key="subIndex"
-              >{{ subParsha }}</md-menu-item
+              >{{ subParsha.Name }}</md-menu-item
             >
           </md-menu-content>
         </md-menu>
@@ -32,7 +33,7 @@ export default {
     return {
       btns: [],
       parshiot: {
-        בראשית: [],
+        בראשית: [{ ID: 0, Name: "" }],
       },
     };
   },
@@ -42,10 +43,8 @@ export default {
     },
   },
   mounted() {
-    console.log(this.parshiot);
     axios.get("http://localhost:3000/api/hierarchy").then((response) => {
       this.btns = response.data;
-
       const dynamicArrays = [];
       const firstID = this.btns[0].ID;
       const initialProducts = this.btns.filter((btn) => btn.Sub_ID === firstID);
@@ -58,37 +57,33 @@ export default {
         dynamicArrays.push(currentProducts);
       }
       const filteredArrays = dynamicArrays.filter((arr) => arr.length > 0);
-      console.log(filteredArrays);
       this.btns = filteredArrays;
 
-      const keysArray = this.btns[0];
-      console.log(keysArray);
-      const valuesArrays = [];
+      for (let i = 0; i < this.btns.length; i++) {
+        const currentArray = this.btns[i];
+        const nextArray = this.btns[i];
 
-      for (let i = 0; i < keysArray.length; i++) {
-        const key = keysArray[i].Name;
-        const values = this.btns[i + 1].map((btn) => btn.Name);
-        this.parshiot[key] = values;
+        if (nextArray) {
+          const key = currentArray[0].Name;
+          const value = nextArray;
+          this.addArrayToParshiot(key, value);
+        }
       }
       console.log(this.parshiot);
     });
   },
-
   methods: {
-    getMore(branch, id) {
-      // axios
-      //   .get("http://localhost:3000/api/hierarchy/" + branch + "/" + id + "/")
-      //   .then((response) => {
-      //     response.data.forEach((obj) => {
-      //       this.btns.push(obj);
-      //     });
-      //   });
-      // axios
-      //   .get("http://localhost:3000/api/hierarchy/" + id + "/")
-      //   .then((response) => {
-      //     store.state.products = response.data; // this.items = store.state.products;
-      //     console.log(response.data);
-      //   });
+    addArrayToParshiot(key, value) {
+      if (value.length === 1) {
+        const [item] = value;
+        this.$set(this.parshiot, key, [{ ID: item.ID, Name: item.Name }]);
+      } else {
+        const nestedArray = value.map((item) => ({
+          ID: item.ID,
+          Name: item.Name,
+        }));
+        this.$set(this.parshiot, key, nestedArray);
+      }
     },
   },
 };
